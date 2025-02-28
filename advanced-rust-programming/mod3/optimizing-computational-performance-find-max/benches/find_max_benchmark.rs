@@ -23,10 +23,15 @@ pub fn criterion_benchmark(c: &mut Criterion) {
         Box::new(SingleThreadedNaive),
         Box::new(StdLib),
         Box::new(SimdArgmaxCrate),
+        Box::new(SimdPulpCrate),
         Box::new(Threaded::new(2, Box::new(SimdArgmaxCrate))),
         Box::new(Threaded::new(4, Box::new(SimdArgmaxCrate))),
         Box::new(Threaded::new(8, Box::new(SimdArgmaxCrate))),
         Box::new(Threaded::new(16, Box::new(SimdArgmaxCrate))),
+        Box::new(Threaded::new(2, Box::new(SimdPulpCrate))),
+        Box::new(Threaded::new(4, Box::new(SimdPulpCrate))),
+        Box::new(Threaded::new(8, Box::new(SimdPulpCrate))),
+        Box::new(Threaded::new(16, Box::new(SimdPulpCrate))),
     ];
 
     for sub in subjects {

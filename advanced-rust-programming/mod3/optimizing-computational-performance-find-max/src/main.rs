@@ -7,7 +7,7 @@ pub mod multi_threaded;
 
 fn main() -> Result<(), Box<dyn Error>> {
     let num_runs = 10;
-    let num_elements: usize = 4_000_000_000;
+    let num_elements: usize = 4_000;
     println!("Initializing data for {num_elements} items");
 
     let data = &mut vec![0u32; num_elements][..];
@@ -19,13 +19,8 @@ fn main() -> Result<(), Box<dyn Error>> {
     println!("Data initialized");
 
     let subjects: Vec<Box<dyn FindMax>> = vec![
-        Box::new(single_threaded::SingleThreadedNaive),
-        Box::new(single_threaded::StdLib),
-        Box::new(single_threaded::SimdArgmaxCrate),
-        Box::new(multi_threaded::Threaded::new(2, Box::new(single_threaded::SimdArgmaxCrate))),
-        Box::new(multi_threaded::Threaded::new(4, Box::new(single_threaded::SimdArgmaxCrate))),
-        Box::new(multi_threaded::Threaded::new(8, Box::new(single_threaded::SimdArgmaxCrate))),
-        Box::new(multi_threaded::Threaded::new(16, Box::new(single_threaded::SimdArgmaxCrate))),
+        // Box::new(SimdPulpCrate),
+        Box::new(multi_threaded::Threaded::new(2, Box::new(single_threaded::SimdPulpCrate))),
     ];
 
     for run_nr in 1..=num_runs {

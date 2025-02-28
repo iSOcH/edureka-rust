@@ -1,7 +1,10 @@
 use crate::FindMax;
 
 pub mod simdargmaxcrate;
+pub mod simdpulpcrate;
+
 pub use simdargmaxcrate::SimdArgmaxCrate;
+pub use simdpulpcrate::SimdPulpCrate;
 
 #[derive(Debug)]
 pub struct SingleThreadedNaive;
