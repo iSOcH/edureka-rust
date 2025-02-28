@@ -1,4 +1,8 @@
-use criterion::{black_box, criterion_group, criterion_main, Criterion};
+use std::time::Duration;
+
+use criterion::{criterion_group, criterion_main, Criterion};
+
+use optimizing_computational_performance_find_max::{single_threaded::*, multi_threaded::Threaded, FindMax};
 
 pub fn criterion_benchmark(c: &mut Criterion) {
     let num_elements: usize = 1_000_000_000;
@@ -10,9 +14,26 @@ pub fn criterion_benchmark(c: &mut Criterion) {
         *val = idx.try_into().unwrap();
     }
 
-    c.bench_function("fib 20", |b| b.iter(|| {
-        
-    }));
+    let mut group = c.benchmark_group("find_max");
+    group
+        .sample_size(20)
+        .measurement_time(Duration::from_secs(60));
+
+    let subjects: Vec<Box<dyn FindMax>> = vec![
+        Box::new(SingleThreadedNaive),
+        Box::new(StdLib),
+        Box::new(SimdArgmaxCrate),
+        Box::new(Threaded::new(2, Box::new(SimdArgmaxCrate))),
+        Box::new(Threaded::new(4, Box::new(SimdArgmaxCrate))),
+        Box::new(Threaded::new(8, Box::new(SimdArgmaxCrate))),
+        Box::new(Threaded::new(16, Box::new(SimdArgmaxCrate))),
+    ];
+
+    for sub in subjects {
+        group.bench_function(&format!("{sub:?}"), |b| b.iter(|| {
+            sub.find_max(&data);
+        }));
+    }
 }
 
 criterion_group!(benches, criterion_benchmark);
