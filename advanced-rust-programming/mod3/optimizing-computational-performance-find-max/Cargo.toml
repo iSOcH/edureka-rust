@@ -5,3 +5,10 @@ edition = "2021"
 
 [dependencies]
 argminmax = { version = "0.6.2", default-features = false }
+
+[dev-dependencies]
+criterion = "0.3"
+
+[[bench]]
+name = "find_max_benchmark"
+harness = false

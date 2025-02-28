@@ -1,7 +1,9 @@
-use std::{error::Error, fmt::Debug, time::SystemTime};
+use std::{error::Error, time::SystemTime};
 
-mod single_threaded;
-mod multi_threaded;
+use optimizing_computational_performance_find_max::FindMax;
+
+pub mod single_threaded;
+pub mod multi_threaded;
 
 fn main() -> Result<(), Box<dyn Error>> {
     let num_runs = 10;
@@ -39,8 +41,4 @@ fn main() -> Result<(), Box<dyn Error>> {
     }
 
     Ok(())
-}
-
-trait FindMax : Debug + Send + Sync {
-    fn find_max(&self, data: &[u32]) -> Option<u32>;
 }
