@@ -3,7 +3,14 @@
 {
 	"name": "Rust",
 	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
-	"image": "mcr.microsoft.com/devcontainers/rust:1-1-bullseye",
+	// "image": "mcr.microsoft.com/devcontainers/rust:1-1-bullseye",
+
+	"dockerComposeFile": [
+		"docker-compose.yaml"
+	],
+	"service": "devcontainer",
+	"workspaceFolder": "/workspace/",
+	
 	"features": {
 		"ghcr.io/devcontainers-extra/features/curl-apt-get:1": {}
 	}
