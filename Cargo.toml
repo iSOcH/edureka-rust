@@ -1,3 +1,3 @@
 [workspace]
 resolver = "2"
-members = [ "advanced-rust-programming/mod2/concurrency-threads-atomic","advanced-rust-programming/mod2/concurrency-threads-mutex", "advanced-rust-programming/mod3/optimizing-computational-performance-find-max", "web-development-with-rust/mod1/rocket-first"]
+members = [ "advanced-rust-programming/mod2/concurrency-threads-atomic","advanced-rust-programming/mod2/concurrency-threads-mutex", "advanced-rust-programming/mod3/optimizing-computational-performance-find-max", "web-development-with-rust/mod1/rocket-first", "web-development-with-rust/mod2/actix-api-1"]
