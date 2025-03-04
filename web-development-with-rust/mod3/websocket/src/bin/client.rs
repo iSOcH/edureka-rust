@@ -1,6 +1,6 @@
 use futures::{SinkExt, StreamExt};
 use tokio_tungstenite::connect_async;
-use tungstenite::protocol::Message;
+use tokio_tungstenite::tungstenite::protocol::Message;
 
 #[tokio::main]
 async fn main() {
@@ -9,7 +9,7 @@ async fn main() {
     println!("WebSocket connection established");
 
     // Send a message to the WebSocket server
-    let message = Message::Text("Hello, server!".to_string());
+    let message = Message::text("Hello, server");
     ws_stream.send(message).await.expect("Failed to send message");
 
     // Receive and print the response from the server
