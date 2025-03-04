@@ -30,7 +30,7 @@ impl Fairing for MyCounterFairing {
         }
     }
 
-    async fn on_response<'r>(&self, request: &'r Request<'_>, result: &mut Response<'r>) {
+    async fn on_response<'r>(&self, _request: &'r Request<'_>, result: &mut Response<'r>) {
         let header = Header {
             name: "req-count".into(),
             value: self.get_requests.load(std::sync::atomic::Ordering::Relaxed).to_string().into()
